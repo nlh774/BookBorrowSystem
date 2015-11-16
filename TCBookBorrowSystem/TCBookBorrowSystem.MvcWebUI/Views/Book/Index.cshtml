@@ -1,0 +1,85 @@
+﻿@using TCBookBorrowSystem.Model;
+@model List<BookContract>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<h3>@Html.ActionLink("+ 新增", "Create")</h3>
+
+@*@using (Html.BeginForm())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="4" style="text-align: left;">
+                    <h3>搜索</h3>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <h5>序列号：</h5>
+                </td>
+                <td>
+                    @Html.TextBox(t => t.)
+                    @Html.ValidationMessageFor(t => t.Search.Code)
+                </td>
+                <td>
+                    <h5>归属项目</h5>
+                </td>
+                <td>@Html.DropDownListFor(t => t.Search.ProjectId, (IEnumerable<SelectListItem>) ViewBag.Projects)</td>
+                <td>
+                    @Html.Hidden("page", "1")
+                    <input type="submit" class="btn btn-primary pull-right" value="搜索" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}*@
+
+    @if (Model != null)
+{
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>序列号</th>
+                    <th>名称</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+            {
+                    <tr>
+                        <td>
+                            @book.SerialId
+                        </td>
+                        <td>
+                            @book.Name
+                        </td>
+                        <td>
+                            @book.BookStatus
+                        </td>
+                        <td style="text-align: center;">
+                            @{
+                            if (book.BookStatus == BookStatus.Avalable)
+                            {
+                                @Html.ActionLink("借阅", "Borrow", new {bookId = book.Id})
+                            }
+                            else
+                            {
+                                @Html.ActionLink("归还", "Return", new {bookId = book.Id})
+                            }
+                            }
+                            @Html.ActionLink("查看借阅记录", "IndexBorrowLog", new { bookId = book.Id })
+                            @Html.ActionLink("删除", "Delete", new { bookId = book.Id }, new { onclick = "javascript:return confirm('确认要删除吗?');" })
+                        </td>
+                    </tr>
+            }
+            </tbody>
+        </table>
+}
+

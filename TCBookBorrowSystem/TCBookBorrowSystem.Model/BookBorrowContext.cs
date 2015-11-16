@@ -21,17 +21,17 @@ namespace TCBookBorrowSystem.Model
         //Database.CreateIfNotExists();
 
         //Book.Add(new BookContract{Name="11111",SerialId="",CreatedOn = DateTime.Now,IsDel=false,Remark="",BookStatus = BookStatus.Avalable});
-        BorrowLog.Add(new BorrowLogContract
-        {
-            BorrowerName = "niulinhua",
-            BorrowTime = DateTime.Now,
-            BookId = 3,
-            RerurnName = DateTime.Now,
-            Remark = "",
-            CreatedOn=DateTime.Now,
-            IsDel = false,
-        });
-        SaveChanges();
+        //BorrowLog.Add(new BorrowLogContract
+        //{
+        //    BorrowerName = "niulinhua",
+        //    BorrowTime = DateTime.Now,
+        //    BookId = 3,
+        //    ReturnTime = DateTime.Now,
+        //    Remark = "",
+        //    CreatedOn=DateTime.Now,
+        //    IsDel = false,
+        //});
+        //SaveChanges();
     }
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)

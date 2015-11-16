@@ -26,7 +26,7 @@ namespace TCBookBorrowSystem.MvcWebUI
             routes.MapRoute(
                 "Default", // 路由名称
                 "{controller}/{action}/{id}", // 带有参数的 URL
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // 参数默认值
+                new { controller = "Book", action = "Index", id = UrlParameter.Optional } // 参数默认值
             );
 
         }
@@ -34,9 +34,6 @@ namespace TCBookBorrowSystem.MvcWebUI
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
-            // 默认情况下对 Entity Framework 使用 LocalDB
-            Database.DefaultConnectionFactory = new SqlConnectionFactory(@"Data Source=(localdb)\v11.0; Integrated Security=True; MultipleActiveResultSets=True");
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);

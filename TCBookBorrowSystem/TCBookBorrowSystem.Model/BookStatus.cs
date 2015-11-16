@@ -10,8 +10,6 @@ namespace TCBookBorrowSystem.Model
     {
         Avalable,
 
-        Borrowed,
-
-        Lost
+        UnAvalable,
     }
 }

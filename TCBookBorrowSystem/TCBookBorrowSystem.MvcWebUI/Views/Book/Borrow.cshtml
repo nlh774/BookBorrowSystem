@@ -1,0 +1,28 @@
+﻿@using TCBookBorrowSystem.Model;
+@model BorrowLogContract
+@{
+    ViewBag.Title = "Borrow";
+}
+
+<h2>Borrow</h2>
+
+@using(Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>借阅人</td>
+            <td>@Html.TextBoxFor(t => t.BorrowerName)</td>
+        </tr>
+        <tr>
+            <td>借阅时间：</td>
+            <td>@Html.TextBoxFor(t => t.BorrowTime)</td>
+        </tr>
+        <tr>
+            <td>备注：</td>
+            <td>@Html.TextBoxFor(t => t.Remark)</td>
+        </tr>
+    </table>
+
+    @Html.HiddenFor(t=>t.BookId)
+    <input type ="submit"  name="提交借阅"/>
+}

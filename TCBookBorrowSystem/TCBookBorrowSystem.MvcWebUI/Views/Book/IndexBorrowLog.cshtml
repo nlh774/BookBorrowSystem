@@ -1,0 +1,45 @@
+﻿@using TCBookBorrowSystem.Model;
+@model List<BorrowLogContract>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if (Model != null)
+{
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>序列号</th>
+                <th>名称</th>
+                <th>借阅人名</th>
+                <th>借阅时间</th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var borrowLog in Model)
+            {
+                <tr>
+                    <td>
+                        @borrowLog.Book.SerialId
+                    </td>
+                    <td>
+                        @borrowLog.Book.Name
+                    </td>
+                    <td>
+                        @borrowLog.BorrowerName
+                    </td>
+                    <td>
+                        @borrowLog.BorrowTime
+                    </td>
+                    <td>
+                        @borrowLog.Remark
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

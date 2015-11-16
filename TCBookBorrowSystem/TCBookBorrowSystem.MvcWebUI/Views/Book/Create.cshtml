@@ -1,0 +1,27 @@
+﻿@using TCBookBorrowSystem.Model;
+@model BookContract
+@{
+    ViewBag.Title = "新增书籍";
+}
+
+<h2>Borrow</h2>
+
+@using(Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>序列号</td>
+            <td>@Html.TextBoxFor(t => t.SerialId)</td>
+        </tr>
+        <tr>
+            <td>书籍名：</td>
+            <td>@Html.TextBoxFor(t => t.Name)</td>
+        </tr>
+        <tr>
+            <td>备注：</td>
+            <td>@Html.TextBoxFor(t => t.Remark)</td>
+        </tr>
+    </table>
+
+    <input type ="submit"  name="保存"/>
+}

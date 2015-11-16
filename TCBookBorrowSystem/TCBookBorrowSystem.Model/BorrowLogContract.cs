@@ -22,7 +22,7 @@ namespace TCBookBorrowSystem.Model
 
         public DateTime BorrowTime { get; set; }
 
-        public DateTime RerurnName { get; set; }
+        public DateTime ReturnTime { get; set; }
 
         [ForeignKey("BookId")]
         public virtual BookContract Book { get; set; }
