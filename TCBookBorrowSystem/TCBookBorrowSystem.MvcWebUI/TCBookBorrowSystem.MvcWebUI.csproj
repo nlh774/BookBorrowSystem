@@ -196,7 +196,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Book\Borrow.cshtml" />
-    <Content Include="Views\Book\BorrowLogIndex.cshtml" />
+    <Content Include="Views\Book\IndexBorrowLog.cshtml" />
     <Content Include="Views\Book\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
