@@ -1,10 +1,11 @@
 ﻿@using TCBookBorrowSystem.Model;
 @model List<BorrowLogContract>
+@using CommTools;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "书本借阅历史记录";
 }
 
-<h2>Index</h2>
+<h2>书本借阅历史记录</h2>
 
 @if (Model != null)
 {
@@ -15,6 +16,7 @@
                 <th>名称</th>
                 <th>借阅人名</th>
                 <th>借阅时间</th>
+                <th>归还时间</th>
                 <th>备注</th>
             </tr>
         </thead>
@@ -26,13 +28,16 @@
                         @borrowLog.Book.SerialId
                     </td>
                     <td>
-                        @borrowLog.Book.Name
+                        @borrowLog.Book.Name.AbbreviateString(20)
                     </td>
                     <td>
                         @borrowLog.BorrowerName
                     </td>
                     <td>
-                        @borrowLog.BorrowTime
+                        @borrowLog.BorrowTime.ToShortDateString()
+                    </td>
+                     <td>
+                        @borrowLog.LoginReturnTime
                     </td>
                     <td>
                         @borrowLog.Remark

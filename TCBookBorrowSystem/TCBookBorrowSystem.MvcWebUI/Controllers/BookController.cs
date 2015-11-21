@@ -13,11 +13,11 @@ namespace TCBookBorrowSystem.MvcWebUI.Controllers
     {
         private BusinessService service = new BusinessService();
 
-        //<TSearch,TResult>
-        public ActionResult Index(BookSearchModel searchModel)
+        public ActionResult Index(TSearchResponse<BookSearchModel, List<BookContract>> searchResponse)
         {
-            var books = service.Index(searchModel);
-            return View(books);
+            if (searchResponse.Search == null) searchResponse.Search = new BookSearchModel();
+            searchResponse.Result = service.Index(searchResponse.Search);
+            return View(searchResponse);
         }
 
         [HttpGet]
@@ -46,12 +46,13 @@ namespace TCBookBorrowSystem.MvcWebUI.Controllers
         public ActionResult Borrow(BorrowLogContract borrowLog)
         {
             service.Borrow(borrowLog);
-            return View();
+            return RedirectToAction("Index");
         }
 
-        public void Return(long bookId)
+        public ActionResult Return(long bookId)
         {
             service.Rerturn(bookId);
+            return RedirectToAction("Index");
         }
 
         public ActionResult IndexBorrowLog(long bookId)
@@ -60,15 +61,11 @@ namespace TCBookBorrowSystem.MvcWebUI.Controllers
             return View(borrowLogs);
         }
 
-        public void Delete(long bookId)
+        public ActionResult Delete(long bookId)
         {
             //考虑返回Json表示删除是否成功，前端再判断、显示
             service.DeleteBook(bookId);
+            return RedirectToAction("Index");
         }
-
-        //public ActionResult BookBorrowLog(long bookId)
-        //{
-        //    service.IndexBookLog(new BookSearchModel {});
-        //}
     }
 }

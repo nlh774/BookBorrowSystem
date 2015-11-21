@@ -41,18 +41,19 @@ namespace TCBookBorrowSystem.Service
         {
             using (BookBorrowContext context = new BookBorrowContext())
             {
+                //按条件查询拼接linq（延迟加载），最终ToList() linq生成sql再到DB中立即查询数据
                 IQueryable<BookContract> query = context.Book.Where(t => t.IsDel == false);
-                if (model.BookId!=0)
+                if (model.BookId.HasValue && model.BookId != 0)
                 {
                     query = context.Book.Where(t => t.Id == model.BookId);
                 }
                 if (model.Name.IsNotNullOrWhiteSpace())
                 {
-                    query = context.Book.Where(t => t.Name.Contains(model.Name));
+                    query = query.Where(t => t.Name.Contains(model.Name));
                 }
                 if (model.SerialId.IsNotNullOrWhiteSpace())
                 {
-                    query = context.Book.Where(t => t.SerialId.Contains(model.SerialId));
+                    query = query.Where(t => t.SerialId.Contains(model.SerialId));
                 }
 
                 return query.ToList();
@@ -93,7 +94,7 @@ namespace TCBookBorrowSystem.Service
                     return null;
                 else
                 {
-                    return context.BorrowLog.Include(t=>t.Book).Where(t => t.BookId == book.Id).ToList();
+                    return context.BorrowLog.Include(t => t.Book).Where(t => t.BookId == book.Id).ToList();
                 }
             }
         }
@@ -119,8 +120,8 @@ namespace TCBookBorrowSystem.Service
 
                         borrowLog.ReturnTime = new DateTime(1900, 1, 1);
                         context.BorrowLog.Add(borrowLog);
-                        context.SaveChanges();
 
+                        context.SaveChanges();
                         trans.Commit();
                         return true;
                     }
@@ -139,19 +140,19 @@ namespace TCBookBorrowSystem.Service
         {
             using (BookBorrowContext context = new BookBorrowContext())
             {
-                //修改书本借阅状态为不可借与增加借阅记录两个操作必须都完成才有效
+                //修改书本借阅状态为可借与修改归还时间两个操作必须都完成才有效
                 using (var trans = context.Database.BeginTransaction())
                 {
                     try
                     {
                         var book = context.Book.FirstOrDefault(t => t.Id == bookId);
                         //if(book == null)  ;
-                        book.BookStatus = BookStatus.UnAvalable;
+                        book.BookStatus = BookStatus.Avalable;
 
                         var borrowLog = context.BorrowLog.FirstOrDefault(t => t.BookId == bookId);
                         borrowLog.ReturnTime = DateTime.Now;
-                        context.SaveChanges();
 
+                        context.SaveChanges();
                         trans.Commit();
                         return true;
                     }
@@ -186,15 +187,15 @@ namespace TCBookBorrowSystem.Service
             string maxSerialId;     //形如 YFSJ0234，后期若书籍大于1万本则4位数字数字不够用。到时序列号末尾字母+1，如 YFSK0001。具体规则到时说
             using (BookBorrowContext context = new BookBorrowContext())
             {
-                maxSerialId =  context.Book.Where(t => t.IsDel == false).Max(t => t.SerialId);  //效率有问题，最好优化下。可以从DB中取出全部书本信息，在代码中找最大的。具体到时再说
+                maxSerialId = context.Book.Max(t => t.SerialId);  //效率有问题，最好优化下。可以从DB中取出全部书本信息，在代码中找最大的。具体到时再说
             }
 
             string prefix = maxSerialId.Substring(0, 4);
-            string postfixNum= maxSerialId.Substring(4);
+            string postfixNum = maxSerialId.Substring(4);
             string newPostfixNum = (int.Parse(postfixNum) + 1).ToString("0000");
             return prefix + newPostfixNum;
         }
 
-       
+
     }
 }

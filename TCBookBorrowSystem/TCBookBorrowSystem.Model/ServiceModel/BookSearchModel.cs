@@ -7,7 +7,7 @@ namespace TCBookBorrowSystem.Model.ServiceModel
 {
     public class BookSearchModel
     {
-        public long BookId { get; set; }
+        public long? BookId { get; set; }
 
         /// <summary>
         /// 序列号
