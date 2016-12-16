@@ -1,0 +1,92 @@
+﻿@using TCBookBorrowSystem.Model;
+@using TCBookBorrowSystem.Model.ServiceModel;
+@model TSearchResponse<BookSearchModel, List<BookContract>>
+@using CommTools;
+@{
+    ViewBag.Title = "书本显示";
+}
+
+<h2>书本显示</h2>
+
+
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th  colspan="4" style="text-align: left;">
+                    <h3>搜索</h3>
+                </th>
+                <th style="text-align: right;">
+                    <h3>@Html.ActionLink("+ 新增书本", "Create")</h3>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <h5>序列号：</h5>
+                </td>
+                <td>
+                    @Html.TextBoxFor(t => t.Search.SerialId)
+                    @Html.ValidationMessageFor(t => t.Search.SerialId)
+                </td>
+                <td>
+                    <h5>书名</h5>
+                </td>
+                 <td>
+                    @Html.TextBoxFor(t => t.Search.Name)
+                    @Html.ValidationMessageFor(t => t.Search.Name)
+                </td>
+                <td>
+                    @Html.Hidden("page", "1")
+                    <input type="submit" class="btn btn-primary pull-right" value="搜索" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+@if (Model.Result != null)
+{
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>序列号</th>
+                    <th>名称</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.Result)
+                {
+                    <tr>
+                        <td>
+                            @book.SerialId
+                        </td>
+                        <td>
+                            @book.Name.AbbreviateString(20)
+                        </td>
+                        <td>@book.BookStatus.GetEnumDesc()
+                        </td>
+                        <td style="text-align: center;">
+                            @{
+                            if (book.BookStatus == BookStatus.Avalable)
+                            {
+                                @Html.ActionLink("借阅", "Borrow", new {bookId = book.Id})
+                            }
+                            else
+                            {
+                                @Html.ActionLink("归还", "Return", new {bookId = book.Id})
+                            }
+                            }
+                            @Html.ActionLink("查看借阅记录", "IndexBorrowLog", new { bookId = book.Id })
+                            @Html.ActionLink("删除", "Delete", new { bookId = book.Id }, new { onclick = "javascript:return confirm('确认要删除吗?');" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+}
+

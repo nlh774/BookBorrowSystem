@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCBookBorrowSystem.Model", "TCBookBorrowSystem.Model\TCBookBorrowSystem.Model.csproj", "{E064709C-984A-42E6-8949-6C51C8760DDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCBookBorrowSystem.Service", "TCBookBorrowSystem.Service\TCBookBorrowSystem.Service.csproj", "{F0C07C91-F4D6-42C8-969C-D5E0A8B4EE7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCBookBorrowSystem.MvcWebUI", "TCBookBorrowSystem.MvcWebUI\TCBookBorrowSystem.MvcWebUI.csproj", "{29FC06E1-F0F0-48A1-9437-E6FFD23CA1BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E064709C-984A-42E6-8949-6C51C8760DDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E064709C-984A-42E6-8949-6C51C8760DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E064709C-984A-42E6-8949-6C51C8760DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E064709C-984A-42E6-8949-6C51C8760DDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0C07C91-F4D6-42C8-969C-D5E0A8B4EE7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0C07C91-F4D6-42C8-969C-D5E0A8B4EE7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0C07C91-F4D6-42C8-969C-D5E0A8B4EE7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0C07C91-F4D6-42C8-969C-D5E0A8B4EE7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29FC06E1-F0F0-48A1-9437-E6FFD23CA1BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29FC06E1-F0F0-48A1-9437-E6FFD23CA1BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29FC06E1-F0F0-48A1-9437-E6FFD23CA1BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29FC06E1-F0F0-48A1-9437-E6FFD23CA1BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
