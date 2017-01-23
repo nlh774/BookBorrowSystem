@@ -15,20 +15,23 @@ namespace NFine.Web.Areas.SystemManage.Controllers
 {
     public class BookController : ControllerBase
     {
-        private RoleApp roleApp = new RoleApp();
+        private BookApp bookApp = new BookApp();
 
 
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetGridJson(string keyword)
         {
-            var data = roleApp.GetList(keyword);
+            var data = bookApp.GetList(keyword);
             return Content(data.ToJson());
         }
 
-        public ActionResult Index()
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetFormJson(string keyValue)
         {
-            return View();
+            var data = bookApp.GetForm(keyValue);
+            return Content(data.ToJson());
         }
     }
 }

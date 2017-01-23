@@ -4,16 +4,17 @@
  * Description: NFine快速开发平台
  * Website：http://www.nfine.cn
 *********************************************************************************/
-using NFine.Data;
 using NFine.Domain.Entity.SystemManage;
-using NFine.Domain.IRepository.SystemManage;
-using NFine.Repository.SystemManage;
-using System.Collections.Generic;
+using System.Data.Entity.ModelConfiguration;
 
-namespace NFine.Repository.SystemManage
+namespace NFine.Mapping.SystemManage
 {
-    public class BookRepository : RepositoryBase<BookEntity>, IBookRepository
+    public class BookMap : EntityTypeConfiguration<BookEntity>
     {
-
+        public BookMap()
+        {
+            this.ToTable("Sys_Book");
+            this.HasKey(t => t.F_Id);
+        }
     }
 }

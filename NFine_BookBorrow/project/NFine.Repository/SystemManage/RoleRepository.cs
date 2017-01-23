@@ -12,71 +12,34 @@ using System.Collections.Generic;
 
 namespace NFine.Repository.SystemManage
 {
-    public class BookRepository : RepositoryBase<BookEntity>, IBookRepository
+    public class RoleRepository : RepositoryBase<RoleEntity>, IRoleRepository
     {
-        int IRepositoryBase<BookEntity>.Insert(BookEntity entity)
+        public void DeleteForm(string keyValue)
         {
-            throw new System.NotImplementedException();
+            using (var db = new RepositoryBase().BeginTrans())
+            {
+                db.Delete<RoleEntity>(t => t.F_Id == keyValue);
+                db.Delete<RoleAuthorizeEntity>(t => t.F_ObjectId == keyValue);
+                db.Commit();
+            }
         }
-
-        int IRepositoryBase<BookEntity>.Insert(List<BookEntity> entitys)
+        public void SubmitForm(RoleEntity roleEntity, List<RoleAuthorizeEntity> roleAuthorizeEntitys, string keyValue)
         {
-            throw new System.NotImplementedException();
-        }
-
-        int IRepositoryBase<BookEntity>.Update(BookEntity entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        int IRepositoryBase<BookEntity>.Delete(BookEntity entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        int IRepositoryBase<BookEntity>.Delete(System.Linq.Expressions.Expression<System.Func<BookEntity, bool>> predicate)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        BookEntity IRepositoryBase<BookEntity>.FindEntity(object keyValue)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        BookEntity IRepositoryBase<BookEntity>.FindEntity(System.Linq.Expressions.Expression<System.Func<BookEntity, bool>> predicate)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        System.Linq.IQueryable<BookEntity> IRepositoryBase<BookEntity>.IQueryable()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        System.Linq.IQueryable<BookEntity> IRepositoryBase<BookEntity>.IQueryable(System.Linq.Expressions.Expression<System.Func<BookEntity, bool>> predicate)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        List<BookEntity> IRepositoryBase<BookEntity>.FindList(string strSql)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        List<BookEntity> IRepositoryBase<BookEntity>.FindList(string strSql, System.Data.Common.DbParameter[] dbParameter)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        List<BookEntity> IRepositoryBase<BookEntity>.FindList(Code.Pagination pagination)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        List<BookEntity> IRepositoryBase<BookEntity>.FindList(System.Linq.Expressions.Expression<System.Func<BookEntity, bool>> predicate, Code.Pagination pagination)
-        {
-            throw new System.NotImplementedException();
+            using (var db = new RepositoryBase().BeginTrans())
+            {
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    db.Update(roleEntity);
+                }
+                else
+                {
+                    roleEntity.F_Category = 1;
+                    db.Insert(roleEntity);
+                }
+                db.Delete<RoleAuthorizeEntity>(t => t.F_ObjectId == roleEntity.F_Id);
+                db.Insert(roleAuthorizeEntitys);
+                db.Commit();
+            }
         }
     }
 }

@@ -16,8 +16,8 @@ namespace NFine.Domain.Entity.SystemManage
         public int BookStatus { get; set; }
         public DateTime CreatedOn { get; set; }
         public bool IsDel { get; set; }
-        public string Remark { get; set; }
 
+        public string F_Description { get; set; }
         public bool? F_DeleteMark { get; set; }
         public bool? F_EnabledMark { get; set; }
         public DateTime? F_CreatorTime { get; set; }

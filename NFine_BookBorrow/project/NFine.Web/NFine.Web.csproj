@@ -619,6 +619,7 @@
   <ItemGroup>
     <Content Include="Areas\SystemManage\Views\User\Info.cshtml" />
     <Content Include="Areas\SystemManage\Views\Book\Index.cshtml" />
+    <Content Include="Areas\SystemManage\Views\Book\Form.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

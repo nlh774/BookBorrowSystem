@@ -15,25 +15,26 @@ namespace NFine.Application.SystemManage
 {
     public class BookApp
     {
-        private IRoleRepository service = new RoleRepository();
+        private IBookRepository service = new BookRepository();
 
         
-        public List<RoleEntity> GetList(string keyword = "")
+        public List<BookEntity> GetList(string keyword = "")
         {
-            var expression = ExtLinq.True<RoleEntity>();
+            var expression = ExtLinq.True<BookEntity>();
             if (!string.IsNullOrEmpty(keyword))
             {
-                expression = expression.And(t => t.F_FullName.Contains(keyword));
-                expression = expression.Or(t => t.F_EnCode.Contains(keyword));
+                expression = expression.And(t => t.Name.Contains(keyword));
             }
-            expression = expression.And(t => t.F_Category == 1);
-            return service.IQueryable(expression).OrderBy(t => t.F_SortCode).ToList();
+            expression = expression.And(t => !t.IsDel);
+            return service.IQueryable(expression).ToList();
         }
+
+        public BookEntity GetForm(string keyValue)
+        {
+            return service.FindEntity(keyValue);
+        }
+
         #region 修改、删除、新增方法暂未开放
-        //public RoleEntity GetForm(string keyValue)
-        //{
-        //    return service.FindEntity(keyValue);
-        //}
         //public void DeleteForm(string keyValue)
         //{
         //    service.DeleteForm(keyValue);
