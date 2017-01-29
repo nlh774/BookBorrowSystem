@@ -50,7 +50,14 @@ namespace NFine.Application.SystemManage
 
         public void DeleteForm(string keyValue)
         {
-            service.Delete(t => t.F_Id == keyValue);
+            //硬删除
+            //service.Delete(t => t.F_Id == keyValue);
+
+            //逻辑删除
+            var entity = service.FindEntity(keyValue);
+            entity.Modify(keyValue);
+            entity.IsDel = true;
+            service.Update(entity);
         }
     }
 }
