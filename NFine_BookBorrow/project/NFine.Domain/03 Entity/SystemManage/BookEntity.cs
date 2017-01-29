@@ -14,7 +14,6 @@ namespace NFine.Domain.Entity.SystemManage
         public string SerialId { get; set; }
         public string Name { get; set; }
         public int BookStatus { get; set; }
-        public DateTime CreatedOn { get; set; }
         public bool IsDel { get; set; }
 
         public string F_Description { get; set; }

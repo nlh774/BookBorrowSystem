@@ -14,24 +14,15 @@
                 async: false,
                 success: function (data) {
                     $("#form1").formSerialize(data);
+                    $("#form1").find('.form-control,select,input').attr('readonly', 'readonly');
+                    $("#form1").find('div.ckbox label').attr('for', '');
                 }
             });
         }
     })
-
+    
     function initControl() {
         //没有逻辑需要实现
-    }
-
-    function submitForm() {
-        var postData = $("#form1").formSerialize();
-        $.submitForm({
-            url: "/SystemManage/Book/SubmitForm?keyValue=" + keyValue,
-            param: postData,
-            success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
-            }
-        });
     }
 </script>
 <form id="form1">

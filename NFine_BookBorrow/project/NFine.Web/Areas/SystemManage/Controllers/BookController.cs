@@ -33,5 +33,24 @@ namespace NFine.Web.Areas.SystemManage.Controllers
             var data = bookApp.GetForm(keyValue);
             return Content(data.ToJson());
         }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubmitForm(BookEntity entity, string keyValue)
+        {
+            bookApp.SubmitForm(entity, keyValue);
+            return Success("操作成功。");
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        [HandlerAuthorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteForm(string keyValue)
+        {
+            bookApp.DeleteForm(keyValue);
+            return Success("删除成功。");
+        }
     }
 }

@@ -390,6 +390,7 @@ $.fn.bindSelect = function (options) {
         });
     }
 }
+//依据权限控制界面上按钮显示、隐藏。id、authorize="yes"
 $.fn.authorizeButton = function () {
     var moduleId = top.$(".NFine_iframe:visible").attr("id").substr(6);
     var dataJson = top.clients.authorizeButton[moduleId];
@@ -397,9 +398,10 @@ $.fn.authorizeButton = function () {
     $element.find('a[authorize=yes]').attr('authorize', 'no');
     if (dataJson != undefined) {
         $.each(dataJson, function (i) {
-            $element.find("#" + dataJson[i].F_EnCode).attr('authorize', 'yes');
+            $element.find("#" + dataJson[i].F_EnCode).attr('authorize', 'yes'); //增加属性authorize="yes"
         });
     }
+    //去除authorize=no的li子节点
     $element.find("[authorize=no]").parents('li').prev('.split').remove();
     $element.find("[authorize=no]").parents('li').remove();
     $element.find('[authorize=no]').remove();

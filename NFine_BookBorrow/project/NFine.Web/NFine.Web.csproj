@@ -620,6 +620,7 @@
     <Content Include="Areas\SystemManage\Views\User\Info.cshtml" />
     <Content Include="Areas\SystemManage\Views\Book\Index.cshtml" />
     <Content Include="Areas\SystemManage\Views\Book\Form.cshtml" />
+    <Content Include="Areas\SystemManage\Views\Book\Details.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>
